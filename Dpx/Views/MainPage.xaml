@@ -20,7 +20,7 @@
                 </OnPlatform>
             </NavigationPage.Icon>
             <x:Arguments>
-                <views:ResultPage />
+                <views:TestPage />
             </x:Arguments>
         </NavigationPage>
     </MasterDetailPage.Detail>

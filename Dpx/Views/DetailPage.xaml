@@ -1,12 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Dpx.Views.DetailPage">
+             x:Class="Dpx.Views.DetailPage"
+             xmlns:localService="clr-namespace:Dpx.Services;assembly=Dpx"
+             BindingContext="{Binding DetailPageViewModel , 
+    Source={StaticResource ViewModelLocator}}"
+             localService:NavigationContext.NavigationParameter="{Binding Poetry}"
+             >
     <ContentPage.Content>
         <StackLayout>
             <Label Text="Welcome to Xamarin.Forms!"
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" />
+            <Label Text="{Binding Poetry.Name}"></Label>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

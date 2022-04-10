@@ -5,7 +5,7 @@
              BindingContext="{Binding ResultPageViewModel,Source={StaticResource ViewModelLocator}}"
              xmlns:scroll ="clr-namespace:Xamarin.Forms.Extended;assembly=Xamarin.Forms.Extended.InfiniteScrolling"
              x:Class="Dpx.Views.ResultPage"
-             BackgroundColor="#00A6A6">
+             >
     <ContentPage.Behaviors>
         <b:EventHandlerBehavior EventName="Appearing">
             <b:ActionCollection>
