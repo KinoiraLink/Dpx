@@ -5,8 +5,10 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using Dpx.Models;
+using Dpx.Services;
 using Dpx.ViewModels;
 using DpxUnitTest.Helpers;
+using Moq;
 using NUnit.Framework;
 
 namespace DpxUnitTest.ViewModel
@@ -29,7 +31,7 @@ namespace DpxUnitTest.ViewModel
 
             var poetryStorage = await PoetryStorageHelper.GetInitializedPoetryStorageAsync();
 
-            var resultPageViewModel = new ResultPageViewModel(poetryStorage);
+            var resultPageViewModel = new ResultPageViewModel(poetryStorage,null);
             resultPageViewModel.Where = where;
             List<string> statusList = new List<string>();
             resultPageViewModel.PropertyChanged += (sender, args) =>
@@ -56,6 +58,23 @@ namespace DpxUnitTest.ViewModel
             Assert.IsFalse(poetryCollectionChanged);
 
             await poetryStorage.CloseAsync();
+        }
+
+        /// <summary>
+        /// 测试点击命令
+        /// </summary>
+        /// <returns></returns>
+        [Test]
+        public async Task TestPoetryTappedCommand()
+        {
+            var contentNavigationServiceMock = new Mock<IContentNavigationService>();
+            var mockContentNavigationService = contentNavigationServiceMock.Object;
+
+
+            var poetryTapped = new Poetry();
+            var resultPageViewModel = new ResultPageViewModel(null, mockContentNavigationService);
+            await resultPageViewModel.PoetryTappedCommandFunction(poetryTapped);
+            contentNavigationServiceMock.Verify(p => p.NavigateToAsync(ContentNavigationContenstants.DetailPage,poetryTapped),Times.Once);
         }
     }
 }

@@ -21,7 +21,7 @@ namespace Dpx.Views
         private async void Button_OnClicked(object sender, EventArgs e)
         {
             var cns = new ContentNavigationService(new ContentPageActivationService());
-            await cns.NavigateToAsync(ContentNavigationContenstants.DetailPage,new Poetry{Name = "滁州西渐"});
+            await cns.NavigateToAsync(ContentNavigationContenstants.DetailPage,new Poetry{Name = "滁州西渐",Content = "",Layout = Poetry.IndentLayout});
         }
     }
 }

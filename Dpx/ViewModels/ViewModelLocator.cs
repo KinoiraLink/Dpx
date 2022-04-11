@@ -31,6 +31,9 @@ namespace Dpx.ViewModels
             SimpleIoc.Default.Register<IPoetryStorage,PoetryStorage>();
             SimpleIoc.Default.Register<ResultPageViewModel>();
             SimpleIoc.Default.Register<DetailPageViewModel>();
+            
+            SimpleIoc.Default.Register<IContentNavigationService,ContentNavigationService>();
+            SimpleIoc.Default.Register<IContentPageActivationService,ContentPageActivationService>();
         }
     }
 }

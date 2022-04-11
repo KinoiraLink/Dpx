@@ -5,7 +5,11 @@
              BindingContext="{Binding ResultPageViewModel,Source={StaticResource ViewModelLocator}}"
              xmlns:scroll ="clr-namespace:Xamarin.Forms.Extended;assembly=Xamarin.Forms.Extended.InfiniteScrolling"
              x:Class="Dpx.Views.ResultPage"
+             xmlns:localConverter="clr-namespace:Dpx.Converters;assembly=Dpx"
              >
+    <ContentPage.Resources>
+        <localConverter:ItemTappedEventArgsToPoetryConverter x:Key="ItemTappedEventArgsToPoetryConverter"></localConverter:ItemTappedEventArgsToPoetryConverter>
+    </ContentPage.Resources>
     <ContentPage.Behaviors>
         <b:EventHandlerBehavior EventName="Appearing">
             <b:ActionCollection>
@@ -17,6 +21,12 @@
         <ListView ItemsSource="{Binding PoetryCollection}">
             <ListView.Behaviors>
                 <scroll:InfiniteScrollBehavior />
+                <b:EventHandlerBehavior EventName="ItemTapped">
+                    <b:ActionCollection>
+                        <b:InvokeCommandAction Command="{Binding PoetryTappedCommand}"
+                                               Converter="{StaticResource ItemTappedEventArgsToPoetryConverter}"></b:InvokeCommandAction>
+                    </b:ActionCollection>
+                </b:EventHandlerBehavior>
             </ListView.Behaviors>
             <ListView.ItemTemplate>
                 <DataTemplate>

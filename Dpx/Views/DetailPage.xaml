@@ -3,16 +3,40 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Dpx.Views.DetailPage"
              xmlns:localService="clr-namespace:Dpx.Services;assembly=Dpx"
+             xmlns:localConverter ="clr-namespace:Dpx.Converters;assembly=Dpx"
              BindingContext="{Binding DetailPageViewModel , 
     Source={StaticResource ViewModelLocator}}"
              localService:NavigationContext.NavigationParameter="{Binding Poetry}"
-             >
+>
+    <ContentPage.Resources>
+        <localConverter:LayoutToTextAlignment x:Key="LayoutToTextAlignment" />
+        <localConverter:TextIndentConverter x:Key="TextIndentConverter" />
+    </ContentPage.Resources>
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-            <Label Text="{Binding Poetry.Name}"></Label>
-        </StackLayout>
+        <ScrollView>
+            <StackLayout Padding="8">
+                <Label FontSize="18"
+                       Margin="0,0,0,8"
+                       HorizontalTextAlignment="Center"
+                       
+                       Text="{Binding Poetry.Name}" />
+                <StackLayout HorizontalOptions="Center"
+                             Orientation="Horizontal">
+                    <Label FontSize="12"
+                           Text="{Binding Poetry.Dynasty}"/>
+                    <Label FontSize="12"
+                           Text="·"/>
+                    <Label FontSize="12"
+                       Text="{Binding Poetry.AuthorName}"/>
+                </StackLayout>
+                
+                <Label FontSize="20" 
+                       Margin="0,0,0,0"
+
+                       HorizontalTextAlignment="{Binding Poetry.Layout,Converter=
+                    {StaticResource 'LayoutToTextAlignment'}}"
+                       Text="{Binding Poetry.Content,Converter={StaticResource TextIndentConverter}}" />
+            </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>
