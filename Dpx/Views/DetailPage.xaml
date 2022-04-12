@@ -4,10 +4,18 @@
              x:Class="Dpx.Views.DetailPage"
              xmlns:localService="clr-namespace:Dpx.Services;assembly=Dpx"
              xmlns:localConverter ="clr-namespace:Dpx.Converters;assembly=Dpx"
+             xmlns:b="clr-namespace:Behaviors;assembly=Behaviors"
              BindingContext="{Binding DetailPageViewModel , 
     Source={StaticResource ViewModelLocator}}"
              localService:NavigationContext.NavigationParameter="{Binding Poetry}"
 >
+    <ContentPage.Behaviors>
+        <b:EventHandlerBehavior EventName="Appearing">
+            <b:ActionCollection>
+                <b:InvokeCommandAction Command="{Binding  PageAppearingCommand}"></b:InvokeCommandAction>
+            </b:ActionCollection>
+        </b:EventHandlerBehavior>
+    </ContentPage.Behaviors>
     <ContentPage.Resources>
         <localConverter:LayoutToTextAlignment x:Key="LayoutToTextAlignment" />
         <localConverter:TextIndentConverter x:Key="TextIndentConverter" />
@@ -36,6 +44,15 @@
                        HorizontalTextAlignment="{Binding Poetry.Layout,Converter=
                     {StaticResource 'LayoutToTextAlignment'}}"
                        Text="{Binding Poetry.Content,Converter={StaticResource TextIndentConverter}}" />
+                <Switch HorizontalOptions="Center" Margin="0,0,0,8" IsToggled="{Binding Favorite.IsFavorite}">
+                    <Switch.Behaviors>
+                        <b:EventHandlerBehavior EventName="Toggled">
+                            <b:ActionCollection>
+                                <b:InvokeCommandAction Command="{Binding FavoriteToggledCommand}"></b:InvokeCommandAction>
+                            </b:ActionCollection>
+                        </b:EventHandlerBehavior>
+                    </Switch.Behaviors>
+                </Switch>
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>

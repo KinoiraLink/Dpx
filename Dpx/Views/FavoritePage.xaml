@@ -1,26 +1,26 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:b="clr-namespace:Behaviors;assembly=Behaviors"
-             BindingContext="{Binding ResultPageViewModel,Source={StaticResource ViewModelLocator}}"
-             xmlns:scroll ="clr-namespace:Xamarin.Forms.Extended;assembly=Xamarin.Forms.Extended.InfiniteScrolling"
-             x:Class="Dpx.Views.ResultPage"
+             x:Class="Dpx.Views.FavoritePage"
+             xmlns:b ="clr-namespace:Behaviors;assembly=Behaviors"
+             xmlns:converters="clr-namespace:Dpx.Converters;assembly=Dpx"
              xmlns:localConverter="clr-namespace:Dpx.Converters;assembly=Dpx"
-             >
+             BindingContext="{Binding FavoritePageViewModel ,Source={StaticResource ViewModelLocator}}">
     <ContentPage.Resources>
         <localConverter:ItemTappedEventArgsToPoetryConverter x:Key="ItemTappedEventArgsToPoetryConverter" />
     </ContentPage.Resources>
+
+
     <ContentPage.Behaviors>
         <b:EventHandlerBehavior EventName="Appearing">
             <b:ActionCollection>
-                <b:InvokeCommandAction Command="{Binding PageAppearingCommand}"></b:InvokeCommandAction>
+                <b:InvokeCommandAction  Command="{Binding PageAppearingCommand}"></b:InvokeCommandAction>
             </b:ActionCollection>
         </b:EventHandlerBehavior>
     </ContentPage.Behaviors>
     <ContentPage.Content>
         <ListView ItemsSource="{Binding PoetryCollection}">
             <ListView.Behaviors>
-                <scroll:InfiniteScrollBehavior />
                 <b:EventHandlerBehavior EventName="ItemTapped">
                     <b:ActionCollection>
                         <b:InvokeCommandAction Command="{Binding PoetryTappedCommand}"
@@ -30,18 +30,9 @@
             </ListView.Behaviors>
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <TextCell Text="{Binding Name}"
-                              Detail="{Binding Snippet}"
-                             ></TextCell>
+                    <TextCell Text="{Binding Name}" Detail="{Binding Snippet}"></TextCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
-            <ListView.Footer>
-                <StackLayout>
-                    <Label Text="{Binding Status}"
-                           HorizontalOptions="Center" 
-                           />
-                </StackLayout>
-            </ListView.Footer>
         </ListView>
     </ContentPage.Content>
 </ContentPage>

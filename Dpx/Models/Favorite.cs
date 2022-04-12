@@ -8,6 +8,7 @@ namespace Dpx.Models
     /// <summary>
     /// 收藏类
     /// </summary>
+    [SQLite.Table("Favorite")]
     public class Favorite
     {
         /// <summary>

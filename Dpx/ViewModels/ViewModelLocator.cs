@@ -23,6 +23,11 @@ namespace Dpx.ViewModels
         public DetailPageViewModel DetailPageViewModel => SimpleIoc.Default.GetInstance<DetailPageViewModel>();
 
         /// <summary>
+        /// 收藏页面注入实例
+        /// </summary>
+        public FavoritePageViewModel FavoritePageViewModel => SimpleIoc.Default.GetInstance<FavoritePageViewModel>();
+
+        /// <summary>
         /// 注册service,viewmodel;
         /// </summary>
         public ViewModelLocator()
@@ -31,9 +36,11 @@ namespace Dpx.ViewModels
             SimpleIoc.Default.Register<IPoetryStorage,PoetryStorage>();
             SimpleIoc.Default.Register<ResultPageViewModel>();
             SimpleIoc.Default.Register<DetailPageViewModel>();
-            
+            SimpleIoc.Default.Register<FavoritePageViewModel>();
+
             SimpleIoc.Default.Register<IContentNavigationService,ContentNavigationService>();
             SimpleIoc.Default.Register<IContentPageActivationService,ContentPageActivationService>();
+            SimpleIoc.Default.Register<IFavoriteStorage,FavoriteStorage>();
         }
     }
 }

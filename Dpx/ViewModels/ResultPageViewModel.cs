@@ -17,6 +17,14 @@ namespace Dpx.ViewModels
         /// 诗词数据库的接口
         /// </summary>
         private IPoetryStorage _poetryStorage;
+        //Todo 演示使用，以后删
+        /// <summary>
+        /// 收藏存储
+        /// </summary>
+        private IFavoriteStorage _favoriteStorage;
+        //Todo 演示使用，以后删
+
+
 
         /// <summary>
         /// 内容服务接口
@@ -28,12 +36,18 @@ namespace Dpx.ViewModels
         /// </summary>
         /// <param name="poetryStorage">诗词存储，数据库</param>
         /// <param name="contentNavigationService">导航服务</param>
-        public ResultPageViewModel(IPoetryStorage poetryStorage,IContentNavigationService contentNavigationService)
+        public ResultPageViewModel(IPoetryStorage poetryStorage,IContentNavigationService contentNavigationService,IFavoriteStorage favoriteStorage)
         {
             //tapped点击进行由搜索页（数据库全查询）到详情页（数据库单挑查询）导航 step1
             _contentNavigationService = contentNavigationService;
+
+
             //显示所有结果数据库全查询 step1
             _poetryStorage = poetryStorage;
+            //Todo 演示使用，以后删
+            _favoriteStorage = favoriteStorage;
+            //Todo 演示使用，以后删
+
             // *无限滚动插件，固有定义
             PoetryCollection = new InfiniteScrollCollection<Poetry>
             {
@@ -114,8 +128,22 @@ namespace Dpx.ViewModels
         {
             Where = Expression.Lambda<Func<Poetry, bool>>(Expression.Constant(true),
                 Expression.Parameter(typeof(Poetry), "p"));
+            //Todo 演示使用，以后删
+            if (!_poetryStorage.IsInitialized())
+            {
+                await _poetryStorage.InitializeAsync();
+                //Todo 演示使用，以后删
+            }
 
-            await _poetryStorage.InitializeAsync();
+            if (_favoriteStorage.IsInitialized())
+            {
+                await _favoriteStorage.InitializeAsync(); 
+                //Todo 演示使用，以后删
+            }
+
+            
+
+
 
             if (!_isNewQuery) return;
 
@@ -126,11 +154,13 @@ namespace Dpx.ViewModels
             await PoetryCollection.LoadMoreAsync();
         }
 
-        private RelayCommand<Poetry> _poetryTappedCommand;
 
         /// <summary>
         /// 诗词点击命令
         /// </summary>
+        private RelayCommand<Poetry> _poetryTappedCommand;
+
+        
         public RelayCommand<Poetry> PoetryTappedCommand =>
             _poetryTappedCommand ?? (_poetryTappedCommand = new RelayCommand<Poetry>(
                 async p => await PoetryTappedCommandFunction(p)

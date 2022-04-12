@@ -79,7 +79,7 @@ namespace Dpx.Services
         /// </summary>
         /// <returns></returns>
         public async Task<IList<Favorite>> GetFavoritesAsync() =>
-            await Connection.Table<Favorite>().ToListAsync();
+            await Connection.Table<Favorite>().Where(p =>p.IsFavorite).ToListAsync();
 
 
         /// <summary>

@@ -31,7 +31,7 @@ namespace DpxUnitTest.ViewModel
 
             var poetryStorage = await PoetryStorageHelper.GetInitializedPoetryStorageAsync();
 
-            var resultPageViewModel = new ResultPageViewModel(poetryStorage,null);
+            var resultPageViewModel = new ResultPageViewModel(poetryStorage,null,null);
             resultPageViewModel.Where = where;
             List<string> statusList = new List<string>();
             resultPageViewModel.PropertyChanged += (sender, args) =>
@@ -72,7 +72,7 @@ namespace DpxUnitTest.ViewModel
 
 
             var poetryTapped = new Poetry();
-            var resultPageViewModel = new ResultPageViewModel(null, mockContentNavigationService);
+            var resultPageViewModel = new ResultPageViewModel(null, mockContentNavigationService,null);
             await resultPageViewModel.PoetryTappedCommandFunction(poetryTapped);
             contentNavigationServiceMock.Verify(p => p.NavigateToAsync(ContentNavigationContenstants.DetailPage,poetryTapped),Times.Once);
         }

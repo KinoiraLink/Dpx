@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Dpx.Models;
@@ -75,13 +76,12 @@ namespace DpxUnitTest.Services
 
             //查所有
             var favoritesAsync = await favoriteStorage.GetFavoritesAsync();
-            Assert.AreEqual(favorites.Count,favoritesAsync.Count);
-            Assert.AreEqual(favorites[1].PoetryId, favoritesAsync[1].PoetryId);
-
+            Assert.AreEqual(favorites.Count(p =>p.IsFavorite),favoritesAsync.Count);
+            Assert.IsTrue(favoritesAsync.All(p =>p.IsFavorite));
             //删除一条数据
             await favoriteStorage.DeleteFavoritesAsync(favorites[0]);
-            favoritesAsync = await favoriteStorage.GetFavoritesAsync();
-            Assert.AreEqual(favorites.Count-1, favoritesAsync.Count);
+             favoritesAsync = await favoriteStorage.GetFavoritesAsync();
+            Assert.AreEqual(favorites.Count(p =>p.IsFavorite)-1, favoritesAsync.Count);
             await favoriteStorage.CloseAsync();
 
         }
