@@ -78,9 +78,19 @@ namespace Dpx.Services
         /// 获取所有收藏信息
         /// </summary>
         /// <returns></returns>
-        public async Task<IList<Favorite>> GetFavoriteAsync() =>
+        public async Task<IList<Favorite>> GetFavoritesAsync() =>
             await Connection.Table<Favorite>().ToListAsync();
 
+
+        /// <summary>
+        /// 删除一条数据，本程序用不到
+        /// </summary>
+        /// <param name="favorite"></param>
+        /// <returns></returns>
+        public async Task DeleteFavoritesAsync(Favorite favorite)
+        {
+            await Connection.DeleteAsync(favorite);
+        }
         //******** 公开方法
 
 
@@ -92,5 +102,14 @@ namespace Dpx.Services
         {
             _preferenceStorage = preferenceStorage;
         }
+
+
+        /// <summary>
+        /// 关闭数据库
+        /// </summary>
+        /// <returns></returns>
+        public async Task CloseAsync() => await Connection.CloseAsync();
+
+        
     }
 }

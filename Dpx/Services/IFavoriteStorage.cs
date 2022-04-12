@@ -47,7 +47,9 @@ namespace Dpx.Services
         /// 获取所有收藏信息
         /// </summary>
         /// <returns></returns>
-        Task<IList<Favorite>> GetFavoriteAsync();
+        Task<IList<Favorite>> GetFavoritesAsync();
+
+        Task DeleteFavoritesAsync(Favorite favorite);
 
 
     }
