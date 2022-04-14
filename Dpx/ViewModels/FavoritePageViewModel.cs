@@ -45,6 +45,32 @@ namespace Dpx.ViewModels
             _poetryStorage = poetryStorage;
             _favoriteStorage = favoriteStorage;
             _contentNavigationService = contentNavigationService;
+            favoriteStorage.UpdateMode += FavoriteStorage_UpdateMode;
+        }
+
+        private async void FavoriteStorage_UpdateMode(object sender, FavoriteStorageUpdateEventArgs e)
+        {
+            if (e.UpdateFavorite.IsFavorite)
+            {
+                var poetry = await _poetryStorage.GetPoetryAsync(e.UpdateFavorite.PoetryId);
+                PoetryCollection.Add(poetry);
+            }
+            else
+            {
+                PoetryCollection.Remove(PoetryCollection.FirstOrDefault(p => p.Id == e.UpdateFavorite.PoetryId));
+            }
+            //var eUpdateFavorite = e.UpdateFavorite;
+
+            //if (!eUpdateFavorite.IsFavorite)
+            //{
+            //    PoetryCollection.Remove(PoetryCollection.FirstOrDefault(p => p.Id == eUpdateFavorite.PoetryId));
+            //}
+            //else
+            //{
+            //    var poetry = await _poetryStorage.GetPoetryAsync(eUpdateFavorite.PoetryId);
+            //    PoetryCollection.Add(poetry);
+            //}
+
         }
 
         //******** 绑定属性
@@ -130,8 +156,13 @@ namespace Dpx.ViewModels
 
             ));
 
-        public async Task PoetryTappedCommandFunction(Poetry poetry) =>
+        public async Task PoetryTappedCommandFunction(Poetry poetry)
+        {
+
             await _contentNavigationService.NavigateToAsync(ContentNavigationContenstants.DetailPage, poetry);
+            //PoetryCollection.Remove(poetry);此为事例用，绝对不对
+        }
+        //=>await _contentNavigationService.NavigateToAsync(ContentNavigationContenstants.DetailPage, poetry);
 
 
         //******** 私有变量

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using Dpx.Models;
+using Xamarin.Forms.PlatformConfiguration.iOSSpecific;
 
 namespace Dpx.Services
 {
@@ -52,6 +53,8 @@ namespace Dpx.Services
         Task DeleteFavoritesAsync(Favorite favorite);
 
 
+
+        event EventHandler<FavoriteStorageUpdateEventArgs> UpdateMode;
     }
 
 
@@ -70,5 +73,26 @@ namespace Dpx.Services
         /// 收藏数据库版本号的键。
         /// </summary>
         public const string VersionKey = nameof(FavoriteStorageConstants) + "." + nameof(Version);
+    }
+
+
+    /// <summary>
+    /// 收藏存储已更新参数
+    /// </summary>
+    public class FavoriteStorageUpdateEventArgs : EventArgs
+    {
+        /// <summary>
+        ///更新收藏。
+        /// </summary>
+        public Favorite UpdateFavorite { get; }
+
+        /// <summary>
+        /// 收藏存储更新事件参数
+        /// </summary>
+        /// <param name="updateFavorite">更新的收藏</param>
+        public FavoriteStorageUpdateEventArgs(Favorite updateFavorite)
+        {
+            UpdateFavorite = updateFavorite;
+        }
     }
 }

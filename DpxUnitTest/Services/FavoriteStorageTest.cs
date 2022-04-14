@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Dpx.Models;
 using Dpx.Services;
 using DpxUnitTest.Helpers;
+using Microsoft.VisualStudio.TestPlatform.CommunicationUtilities.DataCollection;
 using Moq;
 using NUnit.Framework;
 
@@ -64,10 +65,14 @@ namespace DpxUnitTest.Services
                 new Favorite{PoetryId = 1,IsFavorite = true},
                 new Favorite{PoetryId = 2,IsFavorite = false}
             };
+            Favorite updatedFavorite = null;
+            favoriteStorage.UpdateMode += (sender, args) => updatedFavorite = args.UpdateFavorite;
 
             //插入或修改
             await favoriteStorage.SaveFavoriteAsync(favorites[0]);
             await favoriteStorage.SaveFavoriteAsync(favorites[1]);
+
+            Assert.AreSame(favorites[1],updatedFavorite);
 
             //查一条数据
             var favoriteAsync =await favoriteStorage.GetFavoriteAsync(favorites[0].PoetryId);

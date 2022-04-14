@@ -37,6 +37,8 @@ namespace Dpx.Services
         /// </summary>
         private IPreferenceStorage _preferenceStorage;
 
+        
+
         //******** 继承方法
         /// <summary>
         /// 初始化数据库  
@@ -71,8 +73,13 @@ namespace Dpx.Services
         /// </remarks>
         /// <param name="favorite"></param>
         /// <returns></returns>
-        public async Task SaveFavoriteAsync(Favorite favorite) =>
+        public async Task SaveFavoriteAsync(Favorite favorite)
+        {
+
             await Connection.InsertOrReplaceAsync(favorite);
+            UpdateMode?.Invoke(this,new FavoriteStorageUpdateEventArgs(favorite));
+        }
+            
 
         /// <summary>
         /// 获取所有收藏信息
@@ -91,6 +98,10 @@ namespace Dpx.Services
         {
             await Connection.DeleteAsync(favorite);
         }
+
+        public event EventHandler<FavoriteStorageUpdateEventArgs> UpdateMode;
+
+
         //******** 公开方法
 
 
