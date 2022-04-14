@@ -72,12 +72,27 @@ namespace Dpx.ViewModels
 
         public async Task PageAppearingCommandFunction()
         {
-            if (_isLoaded)
+            var canRun = false;
+
+            //二次加锁
+            if (!_isLoaded)//A,B
+            {
+                lock (_isLoadedLock)//(A in,B blocked) or (A blocked,B in)
+                {
+                    if (!_isLoaded)
+                    {
+                        canRun = true;
+                        _isLoaded = true;
+                    }
+                }
+            }
+
+            if (!canRun)
             {
                 return;
             }
-            _isLoaded = true;
 
+            
 
             var favorites = await _favoriteStorage.GetFavoritesAsync();
 
@@ -121,8 +136,14 @@ namespace Dpx.ViewModels
 
         //******** 私有变量
         /// <summary>
-        ///ye mian shi fou jia zai
+        ///页面是否已加载
         /// </summary>
-        private bool _isLoaded;
+        private volatile bool _isLoaded;//volatile禁用Cpu编译器的优化
+
+
+        /// <summary>
+        /// 页面是否已加载锁
+        /// </summary>
+        private readonly object _isLoadedLock = new object();
     }
 }
