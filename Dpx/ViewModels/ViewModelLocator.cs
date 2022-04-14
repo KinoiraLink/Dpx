@@ -27,6 +27,8 @@ namespace Dpx.ViewModels
         /// </summary>
         public FavoritePageViewModel FavoritePageViewModel => SimpleIoc.Default.GetInstance<FavoritePageViewModel>();
 
+
+        public TestViewModel TestViewModel => SimpleIoc.Default.GetInstance<TestViewModel>();
         /// <summary>
         /// 注册service,viewmodel;
         /// </summary>
@@ -37,6 +39,8 @@ namespace Dpx.ViewModels
             SimpleIoc.Default.Register<ResultPageViewModel>();
             SimpleIoc.Default.Register<DetailPageViewModel>();
             SimpleIoc.Default.Register<FavoritePageViewModel>();
+
+            SimpleIoc.Default.Register<TestViewModel>();
 
             SimpleIoc.Default.Register<IContentNavigationService,ContentNavigationService>();
             SimpleIoc.Default.Register<IContentPageActivationService,ContentPageActivationService>();

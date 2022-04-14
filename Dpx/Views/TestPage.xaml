@@ -1,10 +1,41 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Dpx.Views.TestPage">
+             x:Class="Dpx.Views.TestPage"
+             xmlns:localConverter="clr-namespace:Dpx.Converters;assembly=Dpx"
+             xmlns:b ="clr-namespace:Behaviors;assembly=Behaviors"
+             BindingContext="{Binding  TestViewModel,Source={StaticResource ViewModelLocator}}">
     <ContentPage.Content>
-        <StackLayout>
-            <Button Text="Button" Clicked="Button_OnClicked"></Button>
-        </StackLayout>
+        <Grid x:Name="MGrid" ColumnSpacing="0" BackgroundColor="#00BFBF">
+            <Grid.RowDefinitions>
+                <RowDefinition Height ="Auto" />
+                <RowDefinition Height ="*" />
+
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Label Grid.Row="0" Grid.Column="0" FontSize="Title" Text="周一" HorizontalTextAlignment="Center"></Label>
+            <Label Grid.Row="0" Grid.Column="1" FontSize="Title" Text="周二" HorizontalTextAlignment="Center"></Label>
+            <Label Grid.Row="0" Grid.Column="2" FontSize="Title" Text="周三" HorizontalTextAlignment="Center"></Label>
+            <Label Grid.Row="0" Grid.Column="3" FontSize="Title" Text="周四" HorizontalTextAlignment="Center"></Label>
+            <Label Grid.Row="0" Grid.Column="4" FontSize="Title" Text="周五" HorizontalTextAlignment="Center"></Label>
+            <Label Grid.Row="0" Grid.Column="5" FontSize="Title" Text="周六" HorizontalTextAlignment="Center"></Label>
+            <Label Grid.Row="0" Grid.Column="6" FontSize="Title" Text="周日" HorizontalTextAlignment="Center"></Label>
+            <ContentView Grid.Row="1" Grid.Column="0" BackgroundColor="CadetBlue"></ContentView>
+            <ContentView Grid.Row="1" Grid.Column="1" BackgroundColor="AliceBlue"></ContentView>
+            <ContentView Grid.Row="1" Grid.Column="2" BackgroundColor="Violet"></ContentView>
+            <ContentView Grid.Row="1" Grid.Column="3" BackgroundColor="Coral"></ContentView>
+            <ContentView Grid.Row="1" Grid.Column="4" BackgroundColor="CornflowerBlue"></ContentView>
+            <ContentView Grid.Row="1" Grid.Column="5" BackgroundColor="DarkSeaGreen"></ContentView>
+            <ContentView Grid.Row="1" Grid.Column="6" BackgroundColor="Gold"></ContentView>
+        </Grid>
+        
     </ContentPage.Content>
 </ContentPage>

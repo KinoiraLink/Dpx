@@ -4,10 +4,10 @@
              x:Class="Dpx.Views.FavoritePage"
              xmlns:b ="clr-namespace:Behaviors;assembly=Behaviors"
              xmlns:converters="clr-namespace:Dpx.Converters;assembly=Dpx"
-             xmlns:localConverter="clr-namespace:Dpx.Converters;assembly=Dpx"
+             
              BindingContext="{Binding FavoritePageViewModel ,Source={StaticResource ViewModelLocator}}">
     <ContentPage.Resources>
-        <localConverter:ItemTappedEventArgsToPoetryConverter x:Key="ItemTappedEventArgsToPoetryConverter" />
+        <converters:ItemTappedEventArgsToPoetryConverter x:Key="ItemTappedEventArgsToPoetryConverter" />
     </ContentPage.Resources>
 
 
