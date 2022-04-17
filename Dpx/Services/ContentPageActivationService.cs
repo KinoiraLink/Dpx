@@ -25,7 +25,7 @@ namespace Dpx.Services
         /// <returns></returns>
         public ContentPage Activate(string pageKey)
         => cache.ContainsKey(pageKey)?cache[pageKey]: cache[pageKey]=(ContentPage)Activator.CreateInstance(
-            ContentNavigationContenstants.PageKeyTypeDictionary[pageKey]);//语法糖
+            ContentNavigationConstants.PageKeyTypeDictionary[pageKey]);//语法糖
         //{
         //    if (cache.ContainsKey(pageKey))
         //    {
@@ -34,7 +34,7 @@ namespace Dpx.Services
 
         //    //反射 根据类型 创建类型实例，不需要new
         //    cache[pageKey] = (ContentPage)Activator.CreateInstance(
-        //        ContentNavigationContenstants.PageKeyTypeDictionary[pageKey]);
+        //        ContentNavigationConstants.PageKeyTypeDictionary[pageKey]);
         //    return cache[pageKey];
         //}
     }

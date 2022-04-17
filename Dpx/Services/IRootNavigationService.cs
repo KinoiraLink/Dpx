@@ -3,14 +3,13 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using Dpx.Views;
-using Xamarin.Forms;
 
 namespace Dpx.Services
 {
     /// <summary>
-    /// 内容导航服务接口
+    /// 根导航服务
     /// </summary>
-    public interface IContentNavigationService
+    public interface IRootNavigationService
     {
         /// <summary>
         /// 导航到页面
@@ -29,23 +28,30 @@ namespace Dpx.Services
     }
 
     /// <summary>
-        /// 类容导航常量
-        /// </summary>
-        public static class ContentNavigationConstants
+    /// 根导航常量
+    /// </summary>
+    public static class RootNavigationConstants
     {
         /// <summary>
-        /// 诗词详情页
+        /// 诗词收藏页。
         /// </summary>
-        public const string DetailPage = nameof(Views.DetailPage);
+        public const string FavoritePage = nameof(Views.FavoritePage);
 
+        //ToDO to be deleted
+        public const string ResultPage = nameof(Views.ResultPage);
+
+        /// <summary>
+        /// 初始化页
+        /// </summary>
+        public const string InitialzationPage = nameof(Views.InitialzationPage);
         /// <summary>
         /// 页面键-页面类型字典
         /// </summary>
         public static readonly Dictionary<string, Type> PageKeyTypeDictionary = new Dictionary<string, Type>
         {
-            {DetailPage,typeof(DetailPage)}
+            {FavoritePage,typeof(Views.FavoritePage)},
+            {ResultPage,typeof(Views.ResultPage)},
+            {InitialzationPage,typeof(Views.InitialzationPage)}
         };
-
     }
-    
 }

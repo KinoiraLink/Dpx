@@ -5,8 +5,18 @@
             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
             mc:Ignorable="d"
             xmlns:views="clr-namespace:Dpx.Views"
-            x:Class="Dpx.Views.MainPage">
-
+            x:Class="Dpx.Views.MainPage"
+            
+            xmlns:b ="clr-namespace:Behaviors;assembly=Behaviors"
+            BindingContext="{Binding MainPageViewModel, Source={StaticResource ViewModelLocator}}"
+            >
+    <MasterDetailPage.Behaviors>
+        <b:EventHandlerBehavior EventName="Appearing">
+            <b:ActionCollection>
+                <b:InvokeCommandAction Command="{Binding PageApperingCommand}" />
+            </b:ActionCollection>
+        </b:EventHandlerBehavior>
+    </MasterDetailPage.Behaviors>
     <MasterDetailPage.Master>
         <views:MenuPage />
         <!--<views:AboutPage></views:AboutPage>-->
@@ -20,7 +30,7 @@
                 </OnPlatform>
             </NavigationPage.Icon>
             <x:Arguments>
-                <views:TestPage/>
+                <views:ResultPage />
             </x:Arguments>
         </NavigationPage>
     </MasterDetailPage.Detail>

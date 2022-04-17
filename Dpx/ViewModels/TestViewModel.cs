@@ -51,7 +51,7 @@ namespace Dpx.ViewModels
             Debug.WriteLine(ColumnVlue);
         }
     }
-
+    
     public class TestModel
     {
         public int RowValue { get; set; }

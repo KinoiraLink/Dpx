@@ -161,10 +161,10 @@ namespace Dpx.ViewModels
         {
 
             
-            await _contentNavigationService.NavigateToAsync(ContentNavigationContenstants.DetailPage, poetry);
+            await _contentNavigationService.NavigateToAsync(ContentNavigationConstants.DetailPage, poetry);
             //PoetryCollection.Remove(poetry);此为事例用，绝对不对
         }
-        //=>await _contentNavigationService.NavigateToAsync(ContentNavigationContenstants.DetailPage, poetry);
+        //=>await _contentNavigationService.NavigateToAsync(ContentNavigationConstants.DetailPage, poetry);
 
 
         //******** 私有变量

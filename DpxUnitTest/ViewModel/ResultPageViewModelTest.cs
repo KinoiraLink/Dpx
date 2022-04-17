@@ -74,7 +74,7 @@ namespace DpxUnitTest.ViewModel
             var poetryTapped = new Poetry();
             var resultPageViewModel = new ResultPageViewModel(null, mockContentNavigationService,null);
             await resultPageViewModel.PoetryTappedCommandFunction(poetryTapped);
-            contentNavigationServiceMock.Verify(p => p.NavigateToAsync(ContentNavigationContenstants.DetailPage,poetryTapped),Times.Once);
+            contentNavigationServiceMock.Verify(p => p.NavigateToAsync(ContentNavigationConstants.DetailPage,poetryTapped),Times.Once);
         }
     }
 }

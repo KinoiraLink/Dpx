@@ -21,5 +21,11 @@ namespace Dpx.Models
         /// 是否收藏
         /// </summary>
         public bool IsFavorite { get; set; }
+
+
+        /// <summary>
+        /// 时间戳
+        /// </summary>
+        public long Timestamo { get; set; }
     }
 }

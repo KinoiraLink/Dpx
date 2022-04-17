@@ -169,7 +169,7 @@ namespace Dpx.ViewModels
                 ));
 
         public async Task PoetryTappedCommandFunction(Poetry poetry) =>
-            await _contentNavigationService.NavigateToAsync(ContentNavigationContenstants.DetailPage, poetry);
+            await _contentNavigationService.NavigateToAsync(ContentNavigationConstants.DetailPage, poetry);
         //******** 公有变量
 
         /// <summary>

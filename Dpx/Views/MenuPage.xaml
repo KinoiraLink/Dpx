@@ -3,24 +3,35 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             
              mc:Ignorable="d"
              x:Class="Dpx.Views.MenuPage"
-             Title="Menu">
-             
+             Title="Menu"
+
+             xmlns:behaviors ="clr-namespace:Behaviors;assembly=Behaviors"
+             xmlns:localmodel="clr-namespace:Dpx.Models;assembly=Dpx"
+             xmlns:localconverters="clr-namespace:Dpx.Converters;assembly=Dpx"
+             BindingContext="{Binding MenuPageViewModel  ,Source={StaticResource ViewModelLocator}}">
+    <ContentPage.Resources>
+        <localconverters:ItemTappedEventArgsToMenuItemConverter x:Key="ItemToMenuItemConverter"></localconverters:ItemTappedEventArgsToMenuItemConverter>
+    </ContentPage.Resources>
     <StackLayout VerticalOptions="FillAndExpand">
-        <ListView x:Name="ListViewMenu"
-                    HasUnevenRows="True">
-            <d:ListView.ItemsSource>
-                <x:Array Type="{x:Type x:String}">
-                    <x:String>Item 1</x:String>
-                    <x:String>Item 2</x:String>
-                </x:Array>
-            </d:ListView.ItemsSource>
+        <ListView HasUnevenRows="True" 
+                  ItemsSource="{x:Static localmodel:MenuItem.ItemList}">
+            <ListView.Behaviors>
+                <behaviors:EventHandlerBehavior EventName="ItemTapped">
+                    <behaviors:ActionCollection>
+                        <behaviors:InvokeCommandAction 
+                            Command="{Binding MenuItemTappedCommand}" 
+                            Converter="{StaticResource ItemToMenuItemConverter}" />
+                    </behaviors:ActionCollection>
+                </behaviors:EventHandlerBehavior>
+            </ListView.Behaviors>
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
                         <Grid Padding="10">
-                            <Label Text="{Binding Title}" d:Text="{Binding .}" FontSize="20"/>
+                            <Label Text="{Binding Title}" FontSize="20"/>
                         </Grid>
                     </ViewCell>
                 </DataTemplate>

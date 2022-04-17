@@ -6,7 +6,7 @@
              xmlns:b ="clr-namespace:Behaviors;assembly=Behaviors"
              BindingContext="{Binding  TestViewModel,Source={StaticResource ViewModelLocator}}">
     <ContentPage.Content>
-        <Grid x:Name="MGrid" ColumnSpacing="0" BackgroundColor="#00BFBF">
+        <Grid x:Name="MGrid" ColumnSpacing="0" BackgroundColor="#00BFBF" >
             <Grid.RowDefinitions>
                 <RowDefinition Height ="Auto" />
                 <RowDefinition Height ="*" />
