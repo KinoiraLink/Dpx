@@ -26,6 +26,6 @@ namespace Dpx.Models
         /// <summary>
         /// 时间戳
         /// </summary>
-        public long Timestamo { get; set; }
+        public long Timestamp { get; set; }
     }
 }

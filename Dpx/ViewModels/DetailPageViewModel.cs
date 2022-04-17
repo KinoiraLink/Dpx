@@ -96,6 +96,8 @@ namespace Dpx.ViewModels
         {
             if(Favorite.IsFavorite == _isFavorite)return;
             _isFavorite = Favorite.IsFavorite;
+            
+            Favorite.Timestamp = DateTime.Now.Ticks;
             await _favoriteStorage.SaveFavoriteAsync(Favorite);
 
         }

@@ -50,6 +50,12 @@ namespace Dpx.Services
         /// <returns></returns>
         Task<IList<Favorite>> GetFavoritesAsync();
 
+
+        /// <summary>
+        /// 获取所有收藏项，包括收藏与非收藏。
+        /// </summary>
+        /// <returns></returns>
+        Task<IList<Favorite>> GetFavoriteItemsAsync();
         Task DeleteFavoritesAsync(Favorite favorite);
 
 

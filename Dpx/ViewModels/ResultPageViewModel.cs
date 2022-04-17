@@ -38,6 +38,10 @@ namespace Dpx.ViewModels
         /// <param name="contentNavigationService">导航服务</param>
         public ResultPageViewModel(IPoetryStorage poetryStorage,IContentNavigationService contentNavigationService,IFavoriteStorage favoriteStorage)
         {
+            //Todo 供演示使用Where条件
+            Where = Expression.Lambda<Func<Poetry, bool>>(Expression.Constant(true),
+                Expression.Parameter(typeof(Poetry), "p"));
+
             //tapped点击进行由搜索页（数据库全查询）到详情页（数据库单挑查询）导航 step1
             _contentNavigationService = contentNavigationService;
 
@@ -126,20 +130,8 @@ namespace Dpx.ViewModels
         /// <returns></returns>
         public async Task PageAppearingCommandFunction()
         {
-            Where = Expression.Lambda<Func<Poetry, bool>>(Expression.Constant(true),
-                Expression.Parameter(typeof(Poetry), "p"));
-            //Todo 演示使用，以后删
-            if (!_poetryStorage.IsInitialized())
-            {
-                await _poetryStorage.InitializeAsync();
-                //Todo 演示使用，以后删
-            }
-
-            if (_favoriteStorage.IsInitialized())
-            {
-                await _favoriteStorage.InitializeAsync(); 
-                //Todo 演示使用，以后删
-            }
+            
+           
 
             
 

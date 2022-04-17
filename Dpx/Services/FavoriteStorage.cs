@@ -102,6 +102,11 @@ namespace Dpx.Services
         public event EventHandler<FavoriteStorageUpdateEventArgs> UpdateMode;
 
 
+
+        public  async Task<IList<Favorite>> GetFavoriteItemsAsync()
+        =>
+            await Connection.Table<Favorite>().ToListAsync();
+        
         //******** 公开方法
 
 
