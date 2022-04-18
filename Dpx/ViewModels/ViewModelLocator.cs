@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using Dpx.Services;
+using Dpx.Services.Implementations;
 using GalaSoft.MvvmLight.Ioc;
 
 namespace Dpx.ViewModels
@@ -75,6 +76,8 @@ namespace Dpx.ViewModels
             SimpleIoc.Default.Register<MainPageViewModel>();
             SimpleIoc.Default.Register<SyncPageViewModel>();
             SimpleIoc.Default.Register<OneDriveFavoriteStorage>();
+
+            SimpleIoc.Default.Register<IAlertService,AlertService>();
         }
     }
 }

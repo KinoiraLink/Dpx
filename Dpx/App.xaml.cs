@@ -19,7 +19,7 @@ namespace Dpx
             InitializeComponent();
 
             DependencyService.Register<MockDataStore>();
-            MainPage = new MainPage();
+            MainPage = new TestOnedrivePage();
         }
 
         protected override void OnStart()

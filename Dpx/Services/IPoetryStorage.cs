@@ -44,6 +44,7 @@ namespace Dpx.Services
             Expression<Func<Poetry,bool>> where, int skip,int take);
 
 
+
     }
 
     /// <summary>
@@ -51,6 +52,10 @@ namespace Dpx.Services
     /// </summary>
     public static class PoetryStorageConstants
     {
+        /// <summary>
+        /// 诗词总数
+        /// </summary>
+        public const int NumberPoetry = 139;
         /// <summary>
         /// 诗词数据库版本号
         /// </summary>

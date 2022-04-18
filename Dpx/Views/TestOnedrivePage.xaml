@@ -7,10 +7,10 @@
             <Label Text="Welcome to Xamarin.Forms!"
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" />
-            <Button Text="Login" Clicked="Button_OnClicked"></Button>
             <Label x:Name="Result"></Label>
-            <Button Text="Upload" Clicked="AButton_OnClicked"></Button>
-            <Button Text="Download" Clicked="BButton_OnClicked"></Button>
+
+            <Button Text="Alert" Clicked="CButton_OnClicked"></Button>
+            <Button Text="Alert" Clicked="DButton_OnClicked"></Button>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

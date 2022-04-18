@@ -6,6 +6,8 @@ using System.Threading;
 using System.Threading.Tasks;
 using Dpx.Models;
 using Dpx.Services;
+using Dpx.Services.Implementations;
+using GalaSoft.MvvmLight.Ioc;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -18,24 +20,20 @@ namespace Dpx.Views
         {
             InitializeComponent();
         }
-        OneDriveFavoriteStorage o = new OneDriveFavoriteStorage();
-        private async void Button_OnClicked(object sender, EventArgs e)
+        
+
+        private async void CButton_OnClicked(object sender, EventArgs e)
         {
-            
-            Result.Text = (await o.SignInAsync()).ToString();
+            await Task.Run(() =>
+            {
+                new AlertService().DisplayAlert("1","2","3");
+            });
         }
 
-        private async void AButton_OnClicked(object sender, EventArgs e)
+        private async void DButton_OnClicked(object sender, EventArgs e)
         {
-            await o.SaveFavoriteItemsAsync(
-                new List<Favorite> {new Favorite {PoetryId = 0}, new Favorite {PoetryId = 1}});
-
-        }
-
-        private async void BButton_OnClicked(object sender, EventArgs e)
-        {
-            var favorites = await o.GetFavoriteItemAsync();
-            Result.Text = favorites.Count.ToString();
+            Result.Text = (await new JinrishiciService(SimpleIoc.Default.GetInstance<IPreferenceStorage>(),
+                SimpleIoc.Default.GetInstance<IAlertService>(), SimpleIoc.Default.GetInstance<IPoetryStorage>()).GetTodayPoetryAsync()).Name;
         }
     }
 }

@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Azure.Core;
 using Dpx.Confidential;
+using Dpx.Utils;
 using ICSharpCode.SharpZipLib.Core;
 using ICSharpCode.SharpZipLib.Zip;
 using Microsoft.Graph;
@@ -19,7 +20,14 @@ namespace Dpx.Services
 {
     public class OneDriveFavoriteStorage : IRemoteFavoriteStorage
     {
+        //******** 公有变量
+        /// <summary>
+        /// OneDrive服务器
+        /// </summary>
+        public const string OneDriveServer = "OneDrive";
         //******** 私有变量
+
+        private IAlertService _alertService;
 
         /// <summary>
         /// Mircosoft Graph权限数组
@@ -170,7 +178,10 @@ namespace Dpx.Services
             catch (MsalClientException e)
             {
                 //Todo
-                throw;
+                _alertService.DisplayAlert(
+                    ErrorMessages.HTTP_CLIENT_ERROR_TITLE,
+                    ErrorMessages.HttpClientErrorMessage(OneDriveServer, e.Message),
+                    ErrorMessages.HTTP_CLIENT_BUTTON);
             }
             finally
             {
@@ -221,8 +232,9 @@ namespace Dpx.Services
         }
         //******** 公开方法
 
-        public OneDriveFavoriteStorage()
+        public OneDriveFavoriteStorage(IAlertService alertService)
         {
+            _alertService = alertService;
             var builder = PublicClientApplicationBuilder.Create(OneDriveOAuthSettings.ApplicationId);
 
             //Undo Ios 下的处理
