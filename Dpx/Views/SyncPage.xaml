@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+
+             xmlns:b ="clr-namespace:Behaviors;assembly=Behaviors"
+             xmlns:lc ="clr-namespace:Dpx.Converters;assembly=Dpx"
+
+             BindingContext="{Binding SyncPageViewModel,Source={StaticResource ViewModelLocator}}"
+
+             x:Class="Dpx.Views.SyncPage">
+
+    <ContentPage.Behaviors>
+        <b:EventHandlerBehavior EventName="Appearing">
+            <b:ActionCollection>
+                <b:InvokeCommandAction Command="{Binding PageAppearingCommand}" />
+            </b:ActionCollection>
+        </b:EventHandlerBehavior>
+    </ContentPage.Behaviors>
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <lc:NegativeConverter x:Key="Negative" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout Padding="8">
+                <Label Text="同步到OneDrive"
+                       FontSize="Large" 
+                       Margin="0,0,0,8"/>
+                <StackLayout IsVisible="{Binding OneDriveLoading}">
+                    <ActivityIndicator IsRunning="{Binding OneDriveLoading}" />
+                    <Label Text="{Binding OneDriveStatus}" 
+                           HorizontalOptions="Center"/>
+                </StackLayout>
+                <StackLayout IsVisible="{Binding OneDriveLoading ,Converter={StaticResource Negative}}">
+                    <StackLayout
+                        IsVisible="{Binding OneDrivSignedIn,Converter={StaticResource Negative}}">
+                        <Label Text="尚未登录到OneDrive" />
+                        <Button Text="登录OneDrive" Command="{Binding OneDriveSignInCommand}" />
+                    </StackLayout>
+                    <StackLayout IsVisible="{Binding OneDrivSignedIn}">
+                        <Label Text="已经登录到OneDrive。"/>
+                        <Button Text="将收藏同步到"
+                                Command="{Binding OneDriveSyncCommand}" />
+                        <Button Text="退出登录"
+                                Command="{Binding OneDriveSignOutCommand}" />
+                    </StackLayout>
+                </StackLayout>
+               
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

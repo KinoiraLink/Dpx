@@ -78,7 +78,14 @@ namespace Dpx.ViewModels
 
             _isNewPoetry = false;
 
-            var favorite = await _favoriteStorage.GetFavoriteAsync(Poetry.Id)??new Favorite{PoetryId = Poetry.Id};
+            //    var favorite = await _favoriteStorage.GetFavoriteAsync(Poetry.Id)??(new Favorite{PoetryId = Poetry.Id});
+            //var favorite = await _favoriteStorage.GetFavoriteAsync(Poetry.Id) ?? new Favorite { PoetryId = Poetry.Id };
+            var favorite = await _favoriteStorage.GetFavoriteAsync(Poetry.Id);
+            if (favorite == null)
+            {
+                favorite = new Favorite { PoetryId = Poetry.Id };
+            }
+
             _isFavorite = favorite.IsFavorite;
             Favorite = favorite;
 

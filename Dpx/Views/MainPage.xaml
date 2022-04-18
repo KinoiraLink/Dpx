@@ -30,7 +30,7 @@
                 </OnPlatform>
             </NavigationPage.Icon>
             <x:Arguments>
-                <views:ResultPage />
+                <views:SyncPage />
             </x:Arguments>
         </NavigationPage>
     </MasterDetailPage.Detail>

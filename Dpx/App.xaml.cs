@@ -8,7 +8,12 @@ namespace Dpx
 {
     public partial class App : Application
     {
-
+        /// <summary>
+        /// android onedirve登录容器
+        /// </summary>
+        public static object AuthUIParent;
+        
+        public static object iOSKeychainSecurytGroup;
         public App()
         {
             InitializeComponent();

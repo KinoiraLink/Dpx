@@ -44,6 +44,16 @@ namespace Dpx.Services
         /// 初始化页
         /// </summary>
         public const string InitialzationPage = nameof(Views.InitialzationPage);
+
+        /// <summary>
+        /// 同步页
+        /// </summary>
+        public const string SyncPage = nameof(Views.SyncPage);
+
+        
+
+
+
         /// <summary>
         /// 页面键-页面类型字典
         /// </summary>
@@ -51,7 +61,8 @@ namespace Dpx.Services
         {
             {FavoritePage,typeof(Views.FavoritePage)},
             {ResultPage,typeof(Views.ResultPage)},
-            {InitialzationPage,typeof(Views.InitialzationPage)}
+            {InitialzationPage,typeof(Views.InitialzationPage)},
+            {SyncPage,typeof(Views.SyncPage)}
         };
     }
 }

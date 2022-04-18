@@ -24,8 +24,12 @@
 
   <ItemGroup>
     <PackageReference Include="Behaviors.Forms" Version="1.4.0" />
+    <PackageReference Include="Microsoft.Graph" Version="4.25.0" />
+    <PackageReference Include="Microsoft.Identity.Client" Version="4.43.1" />
     <PackageReference Include="MvvmLightLibs" Version="5.4.1.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="Refractored.MvvmHelpers" Version="1.6.2" />
+    <PackageReference Include="SharpZipLib" Version="1.3.3" />
     <PackageReference Include="sqlite-net-pcl" Version="1.8.116" />
     <PackageReference Include="Xamarin.Forms" Version="4.5.0.495" />  
     <PackageReference Include="Xamarin.Essentials" Version="1.3.1" />  
@@ -43,6 +47,12 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\ResultPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\SyncPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\TestOnedrivePage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\TestPage.xaml">

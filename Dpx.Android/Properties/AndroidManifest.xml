@@ -5,6 +5,16 @@
     tools:replace="android:appComponentFactory"
     android:appComponentFactory="whateverString" 
     android:label="Dpx.Android"
-    android:icon="@drawable/xamarin_logo"></application>
+    android:icon="@drawable/xamarin_logo">
+    <activity android:name="microsoft.identity.client.BrowserTabActivity">
+      <intent-filter>
+        <action android:name="android.intent.action.VIEW" />
+        <category android:name="android.intent.category.DEFAULT" />
+        <category android:name="android.intent.category.BROWSABLE" />
+        <data android:scheme="msala0fae441-dd79-4026-ab74-cc2ffa4f841a" android:host="auth" />
+        
+      </intent-filter>
+    </activity>
+  </application>
 	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 </manifest>

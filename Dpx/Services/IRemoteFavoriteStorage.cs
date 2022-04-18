@@ -25,5 +25,22 @@ namespace Dpx.Services
         Task SaveFavoriteItemsAsync(IList<Favorite> favoriteList);
 
 
+        /// <summary>
+        /// 登录
+        /// </summary>
+        /// <returns></returns>
+        Task<bool> SignInAsync();
+
+        /// <summary>
+        /// 注销
+        /// </summary>
+        /// <returns></returns>
+        Task SignOutAsync();
+
+        /// <summary>
+        /// 是否已登录
+        /// </summary>
+        /// <returns></returns>
+        Task<bool> IsSignedInAsync();
     }
 }

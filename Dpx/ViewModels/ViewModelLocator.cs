@@ -48,7 +48,10 @@ namespace Dpx.ViewModels
 
         public MainPageViewModel MainPageViewModel => SimpleIoc.Default.GetInstance<MainPageViewModel>();
 
-
+        /// <summary>
+        /// 同步页ViewModel注入实例
+        /// </summary>
+        public SyncPageViewModel SyncPageViewModel => SimpleIoc.Default.GetInstance<SyncPageViewModel>();
         /// <summary>
         /// 注册service,viewmodel;
         /// </summary>
@@ -70,6 +73,8 @@ namespace Dpx.ViewModels
             SimpleIoc.Default.Register<MenuPageViewModel>();
             SimpleIoc.Default.Register<InitialzationPageViewModel>();
             SimpleIoc.Default.Register<MainPageViewModel>();
+            SimpleIoc.Default.Register<SyncPageViewModel>();
+            SimpleIoc.Default.Register<OneDriveFavoriteStorage>();
         }
     }
 }
