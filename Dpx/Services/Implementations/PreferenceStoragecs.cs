@@ -25,6 +25,8 @@ namespace Dpx.Services
         /// <remarks />
         public int Get(string key, int defaultValue) => Preferences.Get(key, defaultValue);
 
+        
+
         /// <param name="key">Preference key.</param>
         /// <param name="value">Preference value.</param>
         /// <summary>Sets a value for a given key.</summary>
@@ -39,5 +41,10 @@ namespace Dpx.Services
         /// <returns>Value for the given key, or the default if it does not exist.</returns>
         /// <remarks />
         public void Set(string key, int value) => Preferences.Set(key, value);
+
+
+        public DateTime Get(string key, DateTime defaultValue) => Preferences.Get(key, defaultValue);
+        public void Set(string key, DateTime value)
+            => Preferences.Set(key, value);
     }
 }

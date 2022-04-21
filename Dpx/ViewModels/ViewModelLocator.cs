@@ -29,6 +29,10 @@ namespace Dpx.ViewModels
         public FavoritePageViewModel FavoritePageViewModel => SimpleIoc.Default.GetInstance<FavoritePageViewModel>();
 
 
+
+
+
+
         public TestViewModel TestViewModel => SimpleIoc.Default.GetInstance<TestViewModel>();
 
 
@@ -53,6 +57,22 @@ namespace Dpx.ViewModels
         /// 同步页ViewModel注入实例
         /// </summary>
         public SyncPageViewModel SyncPageViewModel => SimpleIoc.Default.GetInstance<SyncPageViewModel>();
+
+
+        /// <summary>
+        /// 今日推荐页注入实例
+        /// </summary>
+        public TodayPageViewModel TodayPageViewModel => SimpleIoc.Default.GetInstance<TodayPageViewModel>();
+
+
+
+
+
+
+
+
+
+
         /// <summary>
         /// 注册service,viewmodel;
         /// </summary>
@@ -78,6 +98,12 @@ namespace Dpx.ViewModels
             SimpleIoc.Default.Register<OneDriveFavoriteStorage>();
 
             SimpleIoc.Default.Register<IAlertService,AlertService>();
+
+
+            SimpleIoc.Default.Register<ITodayPoetryService,JinrishiciService>();
+            SimpleIoc.Default.Register<ITodayImageService,BingImageService>();
+            SimpleIoc.Default.Register<TodayPageViewModel>();
+            SimpleIoc.Default.Register<ITodayImageStorage,TodayImageStorage>();
         }
     }
 }

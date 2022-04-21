@@ -30,7 +30,7 @@ namespace Dpx.Services.Implementations
         /// <summary>
         /// 在内存中缓存的的token
         /// </summary>
-        private string _token;
+        public string _token;
 
 
         /// <summary>

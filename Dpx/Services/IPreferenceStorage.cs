@@ -36,5 +36,13 @@ namespace Dpx.Services
         /// <remarks />
         int Get(string key, int defaultValue);
 
+
+
+
+        void Set(string key, DateTime value);
+
+
+        DateTime Get(string key, DateTime defaultValue);
+
     }
 }

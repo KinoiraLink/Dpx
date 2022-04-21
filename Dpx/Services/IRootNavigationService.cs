@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using Dpx.Views;
+using Xamarin.Forms;
 
 namespace Dpx.Services
 {
@@ -50,6 +51,12 @@ namespace Dpx.Services
         /// </summary>
         public const string SyncPage = nameof(Views.SyncPage);
 
+
+        /// <summary>
+        /// 今日推荐页
+        /// </summary>
+        public const string TodayPage = nameof(Views.TodayPage);
+
         
 
 
@@ -62,7 +69,8 @@ namespace Dpx.Services
             {FavoritePage,typeof(Views.FavoritePage)},
             {ResultPage,typeof(Views.ResultPage)},
             {InitialzationPage,typeof(Views.InitialzationPage)},
-            {SyncPage,typeof(Views.SyncPage)}
+            {SyncPage,typeof(Views.SyncPage)},
+            {TodayPage,typeof(TodayPage)}
         };
     }
 }
