@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Xamarin.Forms;
 
-namespace Dpx.Services
+namespace Dpx.Services.Implementations
 {
     /// <summary>
     /// 导航上下文

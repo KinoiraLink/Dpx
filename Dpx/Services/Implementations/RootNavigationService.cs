@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using Dpx.Services.Implementations;
 using Dpx.Views;
 using Xamarin.Forms;
 

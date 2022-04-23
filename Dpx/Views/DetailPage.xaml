@@ -5,9 +5,10 @@
              xmlns:localService="clr-namespace:Dpx.Services;assembly=Dpx"
              xmlns:localConverter ="clr-namespace:Dpx.Converters;assembly=Dpx"
              xmlns:b="clr-namespace:Behaviors;assembly=Behaviors"
+             xmlns:implementations="clr-namespace:Dpx.Services.Implementations;assembly=Dpx"
              BindingContext="{Binding DetailPageViewModel , 
-    Source={StaticResource ViewModelLocator}}"
-             localService:NavigationContext.NavigationParameter="{Binding Poetry}"
+             Source={StaticResource ViewModelLocator}}"
+             implementations:NavigationContext.NavigationParameter="{Binding Poetry}"
 >
     <ContentPage.Behaviors>
         <b:EventHandlerBehavior EventName="Appearing">

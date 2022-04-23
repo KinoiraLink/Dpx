@@ -6,6 +6,10 @@
              xmlns:scroll ="clr-namespace:Xamarin.Forms.Extended;assembly=Xamarin.Forms.Extended.InfiniteScrolling"
              x:Class="Dpx.Views.ResultPage"
              xmlns:localConverter="clr-namespace:Dpx.Converters;assembly=Dpx"
+             xmlns:ls="clr-namespace:Dpx.Services;assembly=Dpx"
+             xmlns:implementations="clr-namespace:Dpx.Services.Implementations;assembly=Dpx"
+             implementations:NavigationContext.NavigationParameter="{Binding Where}"
+
              >
     <ContentPage.Resources>
         <localConverter:ItemTappedEventArgsToPoetryConverter x:Key="ItemTappedEventArgsToPoetryConverter" />

@@ -38,8 +38,7 @@ namespace Dpx.Services
         /// </summary>
         public const string FavoritePage = nameof(Views.FavoritePage);
 
-        //ToDO to be deleted
-        public const string ResultPage = nameof(Views.ResultPage);
+        
 
         /// <summary>
         /// 初始化页
@@ -57,7 +56,12 @@ namespace Dpx.Services
         /// </summary>
         public const string TodayPage = nameof(Views.TodayPage);
 
-        
+        /// <summary>
+        /// 诗词搜索页
+        /// </summary>
+        public const string SearchPage = nameof(Views.SearchPage);
+
+
 
 
 
@@ -67,10 +71,10 @@ namespace Dpx.Services
         public static readonly Dictionary<string, Type> PageKeyTypeDictionary = new Dictionary<string, Type>
         {
             {FavoritePage,typeof(Views.FavoritePage)},
-            {ResultPage,typeof(Views.ResultPage)},
             {InitialzationPage,typeof(Views.InitialzationPage)},
             {SyncPage,typeof(Views.SyncPage)},
-            {TodayPage,typeof(TodayPage)}
+            {TodayPage,typeof(TodayPage)},
+            {SearchPage,typeof(SearchPage)}
         };
     }
 }

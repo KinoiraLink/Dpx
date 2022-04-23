@@ -51,15 +51,13 @@ namespace Dpx.ViewModels
 
         private async void FavoriteStorage_UpdateMode(object sender, FavoriteStorageUpdateEventArgs e)
         {
+            PoetryCollection.Remove(PoetryCollection.FirstOrDefault(p => p.Id == e.UpdateFavorite.PoetryId));
             if (e.UpdateFavorite.IsFavorite)
             {
                 var poetry = await _poetryStorage.GetPoetryAsync(e.UpdateFavorite.PoetryId);
                 PoetryCollection.Add(poetry);
             }
-            else
-            {
-                PoetryCollection.Remove(PoetryCollection.FirstOrDefault(p => p.Id == e.UpdateFavorite.PoetryId));
-            }
+            
             //var eUpdateFavorite = e.UpdateFavorite;
 
             //if (!eUpdateFavorite.IsFavorite)

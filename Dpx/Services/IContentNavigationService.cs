@@ -37,13 +37,15 @@ namespace Dpx.Services
         /// 诗词详情页
         /// </summary>
         public const string DetailPage = nameof(Views.DetailPage);
+        public const string ResultPage = nameof(Views.ResultPage);
 
         /// <summary>
         /// 页面键-页面类型字典
         /// </summary>
         public static readonly Dictionary<string, Type> PageKeyTypeDictionary = new Dictionary<string, Type>
         {
-            {DetailPage,typeof(DetailPage)}
+            {DetailPage,typeof(DetailPage)},
+            {ResultPage,typeof(ResultPage)}
         };
 
     }

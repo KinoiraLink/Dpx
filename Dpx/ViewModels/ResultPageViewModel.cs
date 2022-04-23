@@ -16,13 +16,7 @@ namespace Dpx.ViewModels
         /// <summary>
         /// 诗词数据库的接口
         /// </summary>
-        private IPoetryStorage _poetryStorage;
-        //Todo 演示使用，以后删
-        /// <summary>
-        /// 收藏存储
-        /// </summary>
-        private IFavoriteStorage _favoriteStorage;
-        //Todo 演示使用，以后删
+    
 
 
 
@@ -36,21 +30,10 @@ namespace Dpx.ViewModels
         /// </summary>
         /// <param name="poetryStorage">诗词存储，数据库</param>
         /// <param name="contentNavigationService">导航服务</param>
-        public ResultPageViewModel(IPoetryStorage poetryStorage,IContentNavigationService contentNavigationService,IFavoriteStorage favoriteStorage)
+        public ResultPageViewModel(IPoetryStorage poetryStorage,IContentNavigationService contentNavigationService)
         {
-            //Todo 供演示使用Where条件
-            Where = Expression.Lambda<Func<Poetry, bool>>(Expression.Constant(true),
-                Expression.Parameter(typeof(Poetry), "p"));
-
-            //tapped点击进行由搜索页（数据库全查询）到详情页（数据库单挑查询）导航 step1
+         
             _contentNavigationService = contentNavigationService;
-
-
-            //显示所有结果数据库全查询 step1
-            _poetryStorage = poetryStorage;
-            //Todo 演示使用，以后删
-            _favoriteStorage = favoriteStorage;
-            //Todo 演示使用，以后删
 
             // *无限滚动插件，固有定义
             PoetryCollection = new InfiniteScrollCollection<Poetry>
@@ -71,6 +54,13 @@ namespace Dpx.ViewModels
                     {
                         Status = NoResult;
                     }
+
+                    if (poetries.Count == 0)
+                    {
+                        return null;
+                    }
+
+
                     return poetries;
                 }
             };

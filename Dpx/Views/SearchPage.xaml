@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:lm="clr-namespace:Dpx.Models;assembly=Dpx"
+             x:Class="Dpx.Views.SearchPage"
+             
+             BindingContext="{Binding SearchPageViewModel, 
+    Source={StaticResource ViewModelLocator}}"
+             >
+    <ContentPage.Content>
+        <Grid>
+            <Grid.Padding>
+                <OnPlatform x:TypeArguments="Thickness">
+                    <On Platform="iOS" Value="8,8,8,20"/>
+                    <On Platform="Android,UWP" Value="8,8,8,8" />
+                </OnPlatform>
+            </Grid.Padding>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <ListView SeparatorVisibility="None"
+                      SelectionMode="None"
+                      RowHeight="100"
+                      ItemsSource="{Binding FilterViewModelCollection}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="2" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <BoxView Grid.RowSpan="2"
+                                         Color="#3498Db" />
+                                <Picker Grid.Row="0" 
+                                        Grid.Column="1"
+                                        ItemsSource="{x:Static lm:FilterType.FilterTypes}"
+                                        SelectedItem="{Binding FilterType}"
+                                        ItemDisplayBinding="{Binding Name}" />
+                                <Entry Grid.Row="0" Grid.Column="2"
+                                       Text="{Binding Content}" />
+                                <StackLayout Grid.Row="1" Grid.Column="1" 
+                                             Grid.ColumnSpan="2"
+                                             Orientation="Horizontal">
+                                    <Button Text="添加" Command="{Binding AddCommand}"/>
+                                    <Button Text="删除" Command="{Binding RemoveCommand}" />
+                                </StackLayout>
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <Button Text="查询" Grid.Row="1" Command="{Binding QueryCommand}" />
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

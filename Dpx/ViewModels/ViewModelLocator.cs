@@ -64,9 +64,15 @@ namespace Dpx.ViewModels
         /// </summary>
         public TodayPageViewModel TodayPageViewModel => SimpleIoc.Default.GetInstance<TodayPageViewModel>();
 
+        /// <summary>
+        /// 诗词搜索注入实例
+        /// </summary>
+        public SearchPageViewModel SearchPageViewModel => SimpleIoc.Default.GetInstance<SearchPageViewModel>();
 
-
-
+        /// <summary>
+        /// 搜索条件注入实例
+        /// </summary>
+        public FilterViewModel FilterViewModel => SimpleIoc.Default.GetInstance<FilterViewModel>();
 
 
 
@@ -105,6 +111,10 @@ namespace Dpx.ViewModels
             SimpleIoc.Default.Register<ITodayImageStorage,TodayImageStorage>();
 
             SimpleIoc.Default.Register<AzureFavoriteStorage>();
+
+            SimpleIoc.Default.Register<SearchPageViewModel>();
+            SimpleIoc.Default.Register<FilterViewModel>();
+
         }
     }
 }

@@ -9,7 +9,17 @@
             
             xmlns:b ="clr-namespace:Behaviors;assembly=Behaviors"
             BindingContext="{Binding MainPageViewModel, Source={StaticResource ViewModelLocator}}"
-            >
+             >
+
+   
+    <MasterDetailPage.MasterBehavior>
+        <OnPlatform x:TypeArguments="MasterBehavior">
+            <On Platform="UWP"
+                Value="SplitOnLandscape" />
+            <On Platform="iOS, Android"
+                Value="Popover" />
+        </OnPlatform>
+    </MasterDetailPage.MasterBehavior>
     <MasterDetailPage.Behaviors>
         <b:EventHandlerBehavior EventName="Appearing">
             <b:ActionCollection>
@@ -17,7 +27,7 @@
             </b:ActionCollection>
         </b:EventHandlerBehavior>
     </MasterDetailPage.Behaviors>
-    <MasterDetailPage.Master>
+    <MasterDetailPage.Master >
         <views:MenuPage />
         <!--<views:AboutPage></views:AboutPage>-->
     </MasterDetailPage.Master>
