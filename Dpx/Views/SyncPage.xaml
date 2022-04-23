@@ -28,18 +28,20 @@
                 <Label Text="同步到OneDrive"
                        FontSize="Large" 
                        Margin="0,0,0,8"/>
-                <StackLayout IsVisible="{Binding OneDriveLoading}">
+                <StackLayout IsVisible="{Binding OneDriveLoading}"  
+                             Margin="0,0,0,8">
                     <ActivityIndicator IsRunning="{Binding OneDriveLoading}" />
                     <Label Text="{Binding OneDriveStatus}" 
                            HorizontalOptions="Center"/>
                 </StackLayout>
-                <StackLayout IsVisible="{Binding OneDriveLoading ,Converter={StaticResource Negative}}">
+                <StackLayout IsVisible="{Binding OneDriveLoading ,Converter={StaticResource Negative}}" 
+                             Margin="0,0,0,8">
                     <StackLayout
-                        IsVisible="{Binding OneDrivSignedIn,Converter={StaticResource Negative}}">
+                        IsVisible="{Binding OneDriveSignedIn,Converter={StaticResource Negative}}">
                         <Label Text="尚未登录到OneDrive" />
                         <Button Text="登录OneDrive" Command="{Binding OneDriveSignInCommand}" />
                     </StackLayout>
-                    <StackLayout IsVisible="{Binding OneDrivSignedIn}">
+                    <StackLayout IsVisible="{Binding OneDriveSignedIn}">
                         <Label Text="已经登录到OneDrive。"/>
                         <Button Text="将收藏同步到"
                                 Command="{Binding OneDriveSyncCommand}" />
@@ -47,7 +49,30 @@
                                 Command="{Binding OneDriveSignOutCommand}" />
                     </StackLayout>
                 </StackLayout>
-               
+                <Label Text="同步到Azure"
+                       FontSize="Large" 
+                       Margin="0,0,0,8"/>
+                <StackLayout IsVisible="{Binding AzureLoading}"  
+                             Margin="0,0,0,8">
+                    <ActivityIndicator IsRunning="{Binding AzureLoading}" />
+                    <Label Text="{Binding AzureStatus}" 
+                           HorizontalOptions="Center"/>
+                </StackLayout>
+                <StackLayout IsVisible="{Binding AzureLoading ,Converter={StaticResource Negative}}" 
+                             Margin="0,0,0,8">
+                    <StackLayout
+                        IsVisible="{Binding AzureSignedIn,Converter={StaticResource Negative}}">
+                        <Label Text="尚未登录到Azure" />
+                        <Button Text="登录Azure" Command="{Binding AzureSignInCommand}" />
+                    </StackLayout>
+                    <StackLayout IsVisible="{Binding AzureSignedIn}">
+                        <Label Text="已经登录到Azure。"/>
+                        <Button Text="将收藏同步到"
+                                Command="{Binding AzureSyncCommand}" />
+                        <Button Text="退出登录"
+                                Command="{Binding AzureSignOutCommand}" />
+                    </StackLayout>
+                </StackLayout>
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>

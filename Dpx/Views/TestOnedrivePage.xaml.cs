@@ -24,16 +24,13 @@ namespace Dpx.Views
 
         private async void CButton_OnClicked(object sender, EventArgs e)
         {
-            await Task.Run(() =>
-            {
-                new AlertService().DisplayAlert("1","2","3");
-            });
+            
         }
 
         private async void DButton_OnClicked(object sender, EventArgs e)
         {
-            Result.Text = (await new JinrishiciService(SimpleIoc.Default.GetInstance<IPreferenceStorage>(),
-                SimpleIoc.Default.GetInstance<IAlertService>(), SimpleIoc.Default.GetInstance<IPoetryStorage>()).GetTodayPoetryAsync()).Name;
+            await SimpleIoc.Default.GetInstance<AzureFavoriteStorage>().SignInAsync();
+            Result.Text = await SimpleIoc.Default.GetInstance<AzureFavoriteStorage>().TestPingAsync();
         }
     }
 }

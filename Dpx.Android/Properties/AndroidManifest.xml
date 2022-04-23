@@ -5,7 +5,8 @@
     tools:replace="android:appComponentFactory"
     android:appComponentFactory="whateverString" 
     android:label="Dpx.Android"
-    android:icon="@drawable/xamarin_logo">
+    android:icon="@drawable/xamarin_logo"
+    android:usesCleartextTraffic="true">
     <activity android:name="microsoft.identity.client.BrowserTabActivity">
       <intent-filter>
         <action android:name="android.intent.action.VIEW" />

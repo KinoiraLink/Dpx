@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using Dpx.Services;
+using Dpx.Services.Implementations;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 
@@ -19,10 +20,17 @@ namespace Dpx.ViewModels
         /// </summary>
         private ISyncService _oneDriveSyncService;
 
+        private ISyncService _azureSyncService;
+
         /// <summary>
         /// OneDrive收藏存储
         /// </summary>
         private IRemoteFavoriteStorage _oneDriveFavoriteStorage;
+
+        /// <summary>
+        /// Auzre收藏存储
+        /// </summary>
+        private IRemoteFavoriteStorage _azureFavoriteStorage;
 
         //******** 构造函数
 
@@ -33,6 +41,7 @@ namespace Dpx.ViewModels
         /// /// <param name="localFavoriteStorage">本地的收藏存储</param>
         public SyncPageViewModel(
             OneDriveFavoriteStorage oneDriveFavoriteStorage,
+            AzureFavoriteStorage azureFavoriteStorage,
             IFavoriteStorage localFavoriteStorage)
         {
             _oneDriveFavoriteStorage = oneDriveFavoriteStorage;
@@ -40,8 +49,16 @@ namespace Dpx.ViewModels
 
             _oneDriveSyncService.StatusChanged += _oneDriveSyncService_StatusChanged;
             _oneDriveFavoriteStorage.StatusChanged += _oneDriveFavoriteStorage_StatusChanged;
+
+
+            _azureFavoriteStorage = azureFavoriteStorage;
+            _azureSyncService = new SyncService(localFavoriteStorage, azureFavoriteStorage);
+
+            _azureSyncService.StatusChanged += _azureSyncService_StatusChanged;
+            _azureFavoriteStorage.StatusChanged += _azureFavoriteStorage_StatusChanged;
         }
 
+        //事件
         private void _oneDriveFavoriteStorage_StatusChanged(object sender, EventArgs e)
         {
             OneDriveStatus = _oneDriveFavoriteStorage.Status;
@@ -51,6 +68,17 @@ namespace Dpx.ViewModels
         {
             OneDriveStatus = _oneDriveSyncService.Status;
         }
+
+        private void _azureFavoriteStorage_StatusChanged(object sender, EventArgs e)
+        {
+            AzureStatus = _azureFavoriteStorage.Status;
+        }
+
+        private void _azureSyncService_StatusChanged(object sender, EventArgs e)
+        {
+            AzureStatus = _azureSyncService.Status;
+        }
+
         //******** 绑定属性
         /// <summary>
         /// OneDrive状态
@@ -68,10 +96,10 @@ namespace Dpx.ViewModels
         /// </summary>
         private bool _oneDriveSignedIn;
 
-        public bool OneDrivSignedIn
+        public bool OneDriveSignedIn
         {
             get => _oneDriveSignedIn;
-            set => Set(nameof(OneDrivSignedIn), ref _oneDriveSignedIn, value);
+            set => Set(nameof(OneDriveSignedIn), ref _oneDriveSignedIn, value);
         }
 
         /// <summary>
@@ -87,18 +115,65 @@ namespace Dpx.ViewModels
 
 
         /// <summary>
+        /// Azure状态
+        /// </summary>
+        private string _azureStatus;
+
+        public string AzureStatus
+        {
+            get => _azureStatus;
+            set => Set(nameof(AzureStatus), ref _azureStatus, value);
+        }
+
+        /// <summary>
+        /// 已登录
+        /// </summary>
+        private bool _azureSignedIn;
+
+        public bool AzureSignedIn
+        {
+            get => _azureSignedIn;
+            set => Set(nameof(AzureSignedIn), ref _azureSignedIn, value);
+        }
+
+        /// <summary>
+        /// 正在登录
+        /// </summary>
+        private bool _azureLoading;
+
+        public bool AzureLoading
+        {
+            get => _azureLoading;
+            set => Set(nameof(AzureLoading), ref _azureLoading, value);
+        }
+
+        //******** 绑定命令
+
+        /// <summary>
         /// 页面显示命令
         /// </summary>
         private RelayCommand __pageAppearing;
 
         public RelayCommand PageAppearingCommand =>
-            __pageAppearing ?? (__pageAppearing = new RelayCommand(async () => await PageAppearingCommandFunction()));
+            __pageAppearing ?? (__pageAppearing = new RelayCommand( () =>  PageAppearingCommandFunction()));
 
-        public async Task PageAppearingCommandFunction()
+        public void PageAppearingCommandFunction()
         {
-            OneDriveLoading = true;
-            OneDrivSignedIn = await _oneDriveFavoriteStorage.IsSignedInAsync();
-            OneDriveLoading = false;
+            Task.Run(async () =>
+            {
+                OneDriveLoading = true;
+                OneDriveSignedIn = await _oneDriveFavoriteStorage.IsSignedInAsync();
+                OneDriveLoading = false;
+            });
+            
+
+            Task.Run(async () =>
+            {
+                AzureLoading = true;
+                AzureSignedIn = await _azureFavoriteStorage.IsSignedInAsync();
+                AzureLoading = false;
+            });
+            
 
         }
 
@@ -113,7 +188,7 @@ namespace Dpx.ViewModels
         public async Task OneDriveSignInCommandFunction()
         {
             OneDriveLoading = true;
-            OneDrivSignedIn = await _oneDriveFavoriteStorage.SignInAsync();
+            OneDriveSignedIn = await _oneDriveFavoriteStorage.SignInAsync();
             OneDriveLoading = false;
         }
 
@@ -130,7 +205,7 @@ namespace Dpx.ViewModels
         {
             OneDriveLoading = true;
             await _oneDriveFavoriteStorage.SignOutAsync();
-            OneDrivSignedIn = false;
+            OneDriveSignedIn = false;
             OneDriveLoading = false;
         }
 
@@ -147,6 +222,53 @@ namespace Dpx.ViewModels
             OneDriveLoading = true;
             await _oneDriveSyncService.SyncAsync();
             OneDriveLoading = false;
+        }
+
+        /// <summary>
+        /// Azure登录命令
+        /// </summary>
+        private RelayCommand _azureSignInCommand;
+
+        public RelayCommand AzureSignInCommand =>
+            _azureSignInCommand ?? (_azureSignInCommand = new RelayCommand(async () => await AzureSignInCommandFunction()));
+
+        public async Task AzureSignInCommandFunction()
+        {
+            AzureLoading = true;
+            AzureSignedIn = await _azureFavoriteStorage.SignInAsync();
+            AzureLoading = false;
+        }
+
+
+        /// <summary>
+        /// Azure注销命令
+        /// </summary>
+        private RelayCommand _azureSignOutCommand;
+
+        public RelayCommand AzureSignOutCommand =>
+            _azureSignOutCommand ?? (_azureSignOutCommand = new RelayCommand(async () => await AzureSignOutCommandFunction()));
+
+        public async Task AzureSignOutCommandFunction()
+        {
+            AzureLoading = true;
+            await _azureFavoriteStorage.SignOutAsync();
+            AzureSignedIn = false;
+            AzureLoading = false;
+        }
+
+        /// <summary>
+        /// Azure同步命令。
+        /// </summary>
+        private RelayCommand _azureSyncCommand;
+
+        public RelayCommand AzureSyncCommand =>
+            _azureSyncCommand ?? (_azureSyncCommand = new RelayCommand(async () => await AzureSyncCommandFunction()));
+
+        public async Task AzureSyncCommandFunction()
+        {
+            AzureLoading = true;
+            await _azureSyncService.SyncAsync();
+            AzureLoading = false;
         }
     }
 }

@@ -72,7 +72,6 @@ namespace Dpx.ViewModels
 
 
 
-
         /// <summary>
         /// 注册service,viewmodel;
         /// </summary>
@@ -104,6 +103,8 @@ namespace Dpx.ViewModels
             SimpleIoc.Default.Register<ITodayImageService,BingImageService>();
             SimpleIoc.Default.Register<TodayPageViewModel>();
             SimpleIoc.Default.Register<ITodayImageStorage,TodayImageStorage>();
+
+            SimpleIoc.Default.Register<AzureFavoriteStorage>();
         }
     }
 }

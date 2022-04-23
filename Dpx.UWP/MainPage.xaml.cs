@@ -13,6 +13,10 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using Dpx;
+using Dpx.Services;
+using Dpx.UWP.Service;
+using GalaSoft.MvvmLight.Ioc;
+
 namespace Dpx.UWP
 {
     public sealed partial class MainPage
@@ -20,6 +24,8 @@ namespace Dpx.UWP
         public MainPage()
         {
             this.InitializeComponent();
+
+            SimpleIoc.Default.Register<IAuthenticationService,AuthenticationServiceUWP>();
 
             LoadApplication(new Dpx.App());
         }
